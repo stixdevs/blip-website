@@ -13,6 +13,10 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        display: ['"Share Tech Mono"', 'monospace'],
+        body: ['"Rajdhani"', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -57,6 +61,8 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        "surface-elevated": "hsl(var(--surface-elevated))",
+        "tactical-line": "hsl(var(--tactical-line))",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -65,25 +71,47 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        glitch: {
+          "0%, 100%": { transform: "translate(0)" },
+          "20%": { transform: "translate(-2px, 1px)" },
+          "40%": { transform: "translate(2px, -1px)" },
+          "60%": { transform: "translate(-1px, -2px)" },
+          "80%": { transform: "translate(1px, 2px)" },
+        },
+        flicker: {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.95" },
+          "52%": { opacity: "0.85" },
+          "54%": { opacity: "1" },
+        },
+        "pulse-glow": {
+          "0%, 100%": { boxShadow: "0 0 5px hsl(175 70% 45% / 0.3)" },
+          "50%": { boxShadow: "0 0 20px hsl(175 70% 45% / 0.6), 0 0 40px hsl(175 70% 45% / 0.2)" },
+        },
+        "slide-in-up": {
+          from: { opacity: "0", transform: "translateY(20px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "live-pulse": {
+          "0%, 100%": { boxShadow: "0 0 0 0 hsl(0 80% 55% / 0.7)" },
+          "50%": { boxShadow: "0 0 0 8px hsl(0 80% 55% / 0)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        glitch: "glitch 0.3s ease-in-out",
+        flicker: "flicker 3s infinite",
+        "pulse-glow": "pulse-glow 2s infinite",
+        "slide-in-up": "slide-in-up 0.6s ease-out forwards",
+        "live-pulse": "live-pulse 2s infinite",
       },
     },
   },
