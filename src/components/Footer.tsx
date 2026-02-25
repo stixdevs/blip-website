@@ -6,7 +6,7 @@ const Footer = () => {
           © {new Date().getFullYear()} // ALL RIGHTS RESERVED
         </p>
         <p className="font-body text-xs text-muted-foreground/50 mt-2">
-          Built with tactical precision
+          Built with 💖 & tactical precision
         </p>
       </div>
     </footer>

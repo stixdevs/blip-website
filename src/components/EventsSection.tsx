@@ -41,7 +41,7 @@ const EventsSection = () => {
         <div className="flex items-center gap-3 mb-4">
           <span className="h-px flex-1 bg-tactical-line" />
           <h2 className="font-display text-2xl tracking-[0.2em] text-secondary">
-            // OPERATIONS
+            // EVENTS ✦
           </h2>
           <span className="h-px flex-1 bg-tactical-line" />
         </div>

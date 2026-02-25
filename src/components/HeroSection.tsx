@@ -7,16 +7,15 @@ const HeroSection = () => {
       <div className="absolute inset-0">
         <img
           src={heroImage}
-          alt="Tactical operator silhouette"
-          className="w-full h-full object-cover opacity-40"
+          alt="Night sky with pink glow"
+          className="w-full h-full object-cover opacity-50"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/40" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/50 to-transparent" />
       </div>
 
       {/* Content */}
       <div className="relative z-20 container mx-auto px-6 flex flex-col items-center text-center">
-        {/* Operator dossier style */}
         <div className="mb-4 flex items-center gap-3">
           <span className="h-px w-12 bg-primary" />
           <span className="font-display text-sm tracking-[0.3em] text-primary uppercase animate-flicker">
@@ -26,7 +25,7 @@ const HeroSection = () => {
         </div>
 
         <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-glow text-primary tracking-wider mb-4 animate-slide-in-up">
-          STREAMER_NAME
+          BLIP
         </h1>
 
         <p className="font-body text-lg md:text-xl text-muted-foreground max-w-xl mb-2 animate-slide-in-up" style={{ animationDelay: '0.1s' }}>
@@ -43,23 +42,20 @@ const HeroSection = () => {
           </span>
         </div>
 
-        {/* Live status placeholder */}
         <LiveStatusBadge />
       </div>
 
-      {/* Bottom tactical decoration */}
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
     </section>
   );
 };
 
 const LiveStatusBadge = () => {
-  // This will later integrate with Twitch API
   const isLive = false;
 
   return (
     <a
-      href="https://twitch.tv"
+      href="https://www.twitch.tv/blipr6"
       target="_blank"
       rel="noopener noreferrer"
       className={`
