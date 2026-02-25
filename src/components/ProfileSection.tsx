@@ -5,7 +5,7 @@ const ProfileSection = () => {
         <div className="flex items-center gap-3 mb-12">
           <span className="h-px flex-1 bg-tactical-line" />
           <h2 className="font-display text-2xl tracking-[0.2em] text-primary text-glow">
-            // OPERATOR PROFILE
+            // OPERATOR PROFILE ✦
           </h2>
           <span className="h-px flex-1 bg-tactical-line" />
         </div>
@@ -34,7 +34,7 @@ const ProfileSection = () => {
 
           {/* Dossier info */}
           <div className="flex flex-col justify-center space-y-6">
-            <DossierField label="CODENAME" value="[ Your Wife's Gamertag ]" />
+            <DossierField label="CODENAME" value="Blip" />
             <DossierField label="PRIMARY GAME" value="Tom Clancy's Rainbow Six Siege" />
             <DossierField label="FAVORITE OPERATOR" value="NØKK — HEL Presence Reduction" />
             <DossierField label="SECONDARY GAME" value="Ark Raiders" />
