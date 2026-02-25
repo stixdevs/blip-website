@@ -19,7 +19,7 @@ const HeroSection = () => {
         <div className="mb-4 flex items-center gap-3">
           <span className="h-px w-12 bg-primary" />
           <span className="font-display text-sm tracking-[0.3em] text-primary uppercase animate-flicker">
-            // OPERATOR DOSSIER
+            📺 LIVE ON TWITCH
           </span>
           <span className="h-px w-12 bg-primary" />
         </div>
@@ -29,7 +29,7 @@ const HeroSection = () => {
         </h1>
 
         <p className="font-body text-lg md:text-xl text-muted-foreground max-w-xl mb-2 animate-slide-in-up" style={{ animationDelay: '0.1s' }}>
-          Rainbow Six Siege · Ark Raiders · Tactical Chaos
+          Twitch Streamer · Rainbow Six Siege · Ark Raiders
         </p>
 
         <div className="flex items-center gap-2 mt-2 mb-8 animate-slide-in-up" style={{ animationDelay: '0.2s' }}>

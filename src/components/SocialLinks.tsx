@@ -41,7 +41,7 @@ const links: SocialLink[] = [
 
 const SocialLinks = () => {
   return (
-    <section className="relative py-24 scanline-overlay">
+    <section id="connect" className="relative py-24 scanline-overlay">
       <div className="container mx-auto px-6">
         <div className="flex items-center gap-3 mb-12">
           <span className="h-px flex-1 bg-tactical-line" />

@@ -36,7 +36,7 @@ const upcomingEvents: GameEvent[] = [
 
 const EventsSection = () => {
   return (
-    <section className="relative py-24 scanline-overlay">
+    <section id="events" className="relative py-24 scanline-overlay">
       <div className="container mx-auto px-6">
         <div className="flex items-center gap-3 mb-4">
           <span className="h-px flex-1 bg-tactical-line" />
