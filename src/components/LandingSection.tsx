@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import { FaTwitch } from "react-icons/fa";
 import bgImage from "@/assets/background-image.png";
 
 const TWITCH_CHANNEL = "blipr6";
@@ -22,10 +21,11 @@ const buildEmbedUrl = () => {
 
 const LandingSection = () => {
   const [isLive, setIsLive] = useState(false);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  const detectionRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
-    const iframe = iframeRef.current;
+    const iframe = detectionRef.current;
     if (!iframe) return;
 
     let liveDetected = false;
@@ -47,8 +47,8 @@ const LandingSection = () => {
     iframe.addEventListener("load", handleLoad);
 
     const interval = setInterval(() => {
-      if (!liveDetected) {
-        iframe.src = buildEmbedUrl() + "&t=" + Date.now();
+      if (!liveDetected && detectionRef.current) {
+        detectionRef.current.src = buildEmbedUrl() + "&t=" + Date.now();
       }
     }, 30000);
 
@@ -61,16 +61,16 @@ const LandingSection = () => {
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden scanline-overlay">
       
-      {/* HIDDEN LIVE DETECTION IFRAME */}
+      {/* Hidden Live Detection Iframe */}
       <iframe
-        ref={iframeRef}
+        ref={detectionRef}
         src={buildEmbedUrl()}
         className="absolute w-0 h-0 opacity-0 pointer-events-none"
         title="Live detection"
         aria-hidden="true"
         tabIndex={-1}
       />
-      
+
       {/* Background */}
       <div className="absolute inset-0">
         <img
@@ -111,12 +111,9 @@ const LandingSection = () => {
               ROLE: ATTACKER
             </span>
           </div>
-
-          <LiveStatusBadge isLive={isLive} />
         </div>
 
-        {/* ===== LARGE STREAM EMBED ===== */}
-        {isLive && (
+        {/* ===== STREAM EMBED ===== */}
         <div
           className="w-full max-w-6xl animate-slide-in-up"
           style={{ animationDelay: "0.2s" }}
@@ -127,79 +124,19 @@ const LandingSection = () => {
               style={{ paddingBottom: "56.25%" }}
             >
               <iframe
-                ref={iframeRef}
                 src={buildEmbedUrl()}
                 className="absolute inset-0 w-full h-full"
                 allowFullScreen
                 title="Blip's Twitch Stream"
               />
             </div>
-
-            <div className="flex items-center justify-between px-5 py-3 border-t border-border">
-              <span className="font-display text-sm tracking-wider text-foreground">
-                blipr6
-              </span>
-
-              <a
-                href="https://www.twitch.tv/blipr6"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-display text-xs tracking-widest px-4 py-1.5 bg-primary/10 border border-primary/30 text-primary hover:bg-primary/20 transition-all"
-              >
-                OPEN IN TWITCH →
-              </a>
-            </div>
           </div>
         </div>
-        )}
-        
+
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
     </section>
-  );
-};
-
-const LiveStatusBadge = ({ isLive }: { isLive: boolean }) => {
-  return (
-    <a
-      href="https://www.twitch.tv/blipr6"
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`
-        group relative inline-flex items-center justify-center gap-3
-        min-w-[180px] px-6 py-3 tactical-border
-        font-display text-sm tracking-widest uppercase
-        transition-all duration-300 overflow-hidden
-        ${
-          isLive
-            ? "border-destructive text-destructive box-glow-amber"
-            : "border-border text-muted-foreground"
-        }
-        hover:border-primary
-      `}
-    >
-      {/* Base Content */}
-      <div className="flex items-center gap-3 transition-opacity duration-200 group-hover:opacity-0">
-        <span
-          className={`w-2.5 h-2.5 rounded-full ${
-            isLive
-              ? "bg-destructive animate-live-pulse"
-              : "bg-muted-foreground group-hover:bg-primary"
-          }`}
-        />
-        <span>{isLive ? "LIVE NOW" : "OFFLINE"}</span>
-      </div>
-
-      {/* Hover Content */}
-      <div className="absolute flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-        <span>{isLive ? "WATCH ON" : "GO TO"}</span>
-        <FaTwitch className="text-primary text-sm" />
-      </div>
-
-      {/* Bottom animated bar */}
-      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-    </a>
   );
 };
 
