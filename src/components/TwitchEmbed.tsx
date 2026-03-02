@@ -1,16 +1,18 @@
 const TWITCH_CHANNEL = "blipr6";
 
-const PARENTS = [
-  "localhost",
-  "id-preview--f8eef2d3-bcaf-43fa-8ce4-261aa6e60d5f.lovable.app",
-  "blipbrand.com",
-];
+const getParents = () => {
+  const parents = new Set<string>();
+  parents.add("localhost");
+  // Add the current hostname so it always works in whatever environment
+  parents.add(window.location.hostname);
+  return Array.from(parents);
+};
 
 const buildEmbedUrl = () => {
   const params = new URLSearchParams();
   params.set("channel", TWITCH_CHANNEL);
   params.set("muted", "true");
-  PARENTS.forEach((p) => params.append("parent", p));
+  getParents().forEach((p) => params.append("parent", p));
   return `https://player.twitch.tv/?${params.toString()}`;
 };
 
