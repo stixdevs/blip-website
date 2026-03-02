@@ -72,7 +72,7 @@ const HeroSection = () => {
           </h1>
 
           <p className="font-body text-lg md:text-xl text-muted-foreground max-w-xl mb-2 animate-slide-in-up" style={{ animationDelay: '0.1s' }}>
-            Twitch Streamer · Rainbow Six Siege · Ark Raiders
+            Twitch Streamer · Rainbow Six Siege · Arc Raiders
           </p>
 
           <div className="flex items-center gap-2 mt-2 mb-8 animate-slide-in-up" style={{ animationDelay: '0.2s' }}>

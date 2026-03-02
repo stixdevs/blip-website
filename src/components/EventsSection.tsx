@@ -25,9 +25,9 @@ const upcomingEvents: GameEvent[] = [
   },
   {
     id: "2",
-    title: "ARK RAIDERS RAID PARTY",
+    title: "ARC RAIDERS RAID PARTY",
     date: "2026-03-14",
-    game: "Ark Raiders",
+    game: "Arc Raiders",
     spotsLeft: 8,
     totalSpots: 10,
     description: "Survival co-op stream — loot, build, survive together.",

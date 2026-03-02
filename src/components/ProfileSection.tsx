@@ -33,7 +33,7 @@ const ProfileSection = () => {
             <DossierField label="CODENAME" value="Blip" />
             <DossierField label="PRIMARY GAME" value="Tom Clancy's Rainbow Six Siege" />
             <DossierField label="FAVORITE R6 OPERATOR" value="NØKK — HEL Presence Reduction" />
-            <DossierField label="SECONDARY GAME" value="Ark Raiders" />
+            <DossierField label="SECONDARY GAME" value="Arc Raiders" />
             <DossierField label="SPECIAL UNITS" value="🐱 Cheeto  ·  🐱 Mochie" />
             <DossierField label="STATUS" value="Ready for chaos" />
 

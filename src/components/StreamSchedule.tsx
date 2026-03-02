@@ -6,12 +6,12 @@ interface ScheduleDay {
 }
 
 const schedule: ScheduleDay[] = [
-  { day: "MON", time: "—", game: "", active: false },
-  { day: "TUE", time: "8PM EST", game: "R6 Siege", active: true },
-  { day: "WED", time: "—", game: "", active: false },
-  { day: "THU", time: "8PM EST", game: "R6 Siege", active: true },
-  { day: "FRI", time: "9PM EST", game: "Variety", active: true },
-  { day: "SAT", time: "3PM EST", game: "Ark Raiders", active: true },
+  { day: "MON", time: "6PM EST", game: "R6 Siege", active: true },
+  { day: "TUE", time: "6PM EST", game: "R6 Siege", active: true },
+  { day: "WED", time: "6PM EST", game: "R6 Siege", active: true },
+  { day: "THU", time: "6PM EST", game: "R6 Siege", active: true },
+  { day: "FRI", time: "6PM EST", game: "R6 Siege", active: true },
+  { day: "SAT", time: "6PM EST", game: "R6 Siege", active: true },
   { day: "SUN", time: "—", game: "", active: false },
 ];
 
