@@ -134,7 +134,7 @@ const LandingSection = () => {
           style={{ animationDelay: "0.35s" }}
         >
           <p className="text-lg text-foreground font-medium">
-            Hi, I’m Blip.
+            Hi, I’m blip.
           </p>
 
           <p>
