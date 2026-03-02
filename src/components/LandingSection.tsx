@@ -59,6 +59,17 @@ const LandingSection = () => {
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden scanline-overlay">
+      
+      {/* HIDDEN LIVE DETECTION IFRAME */}
+      <iframe
+        ref={iframeRef}
+        src={buildEmbedUrl()}
+        className="absolute w-0 h-0 opacity-0 pointer-events-none"
+        title="Live detection"
+        aria-hidden="true"
+        tabIndex={-1}
+      />
+      
       {/* Background */}
       <div className="absolute inset-0">
         <img
@@ -104,6 +115,7 @@ const LandingSection = () => {
         </div>
 
         {/* ===== LARGE STREAM EMBED ===== */}
+        {isLive && (
         <div
           className="w-full max-w-6xl animate-slide-in-up"
           style={{ animationDelay: "0.2s" }}
@@ -138,6 +150,8 @@ const LandingSection = () => {
             </div>
           </div>
         </div>
+        )}
+        
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
