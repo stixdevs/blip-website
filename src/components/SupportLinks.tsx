@@ -1,7 +1,7 @@
 import { ExternalLink } from "lucide-react";
-import { FaTwitch, FaYoutube, FaDiscord, FaEtsy } from "react-icons/fa";
+import { FaDonate, FaGift, FaEtsy } from "react-icons/fa";
 
-interface SocialLink {
+interface SupportLink {
   name: string;
   url: string;
   description: string;
@@ -9,38 +9,38 @@ interface SocialLink {
   active: boolean;
 }
 
-const links: SocialLink[] = [
+const links: SupportLink[] = [
   {
-    name: "TWITCH",
-    url: "https://www.twitch.tv/blipr6",
-    description: "Live streams & VODs",
-    icon: <FaTwitch />,
+    name: "TIPS",
+    url: "https://streamelements.com/blipr6/tip",
+    description: "Tip directly on streamelements",
+    icon: <FaDonate />,
     active: true,
   },
   {
-    name: "YOUTUBE",
-    url: "https://www.youtube.com/@blipR6",
-    description: "Highlights & content",
-    icon: <FaYoutube />,
+    name: "THRONE",
+    url: "https://throne.com/blipr6",
+    description: "Gift a wishlist item",
+    icon: <FaGift />,
     active: true,
   },
   {
-    name: "DISCORD",
-    url: "https://discord.gg/S9MueNj96E",
-    description: "Join the community",
-    icon: <FaDiscord />,
-    active: true,
-  }
+    name: "ETSY MERCH",
+    url: "#",
+    description: "Coming soon ✨",
+    icon: <FaEtsy />,
+    active: false,
+  },
 ];
 
-const SocialLinks = () => {
+const SupportLinks = () => {
   return (
-    <section id="socials" className="relative py-24 scanline-overlay">
+    <section id="support" className="relative py-24 scanline-overlay">
       <div className="container mx-auto px-6">
         <div className="flex items-center gap-3 mb-12">
           <span className="h-px flex-1 bg-tactical-line" />
           <h2 className="font-display text-2xl tracking-[0.2em] text-primary text-glow">
-            // SOCIALS ✦
+            // SUPPORT ✦
           </h2>
           <span className="h-px flex-1 bg-tactical-line" />
         </div>
@@ -88,4 +88,4 @@ const SocialLinks = () => {
   );
 };
 
-export default SocialLinks;
+export default SupportLinks;

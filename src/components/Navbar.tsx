@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { FaTwitch, FaYoutube, FaDiscord } from "react-icons/fa";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -9,7 +10,7 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (id) => {
+  const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
@@ -19,32 +20,66 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-background/90 backdrop-blur-md border-b border-border" : ""
+        scrolled
+          ? "bg-background/90 backdrop-blur-md border-b border-border"
+          : ""
       }`}
     >
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-        <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="font-display text-xl tracking-[0.2em] text-primary text-glow">
+        {/* Logo */}
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="font-display text-xl tracking-[0.2em] text-primary text-glow"
+        >
           BLIP
         </button>
+
+        {/* Nav Links */}
         <div className="hidden md:flex items-center gap-8">
           {["ABOUT", "SCHEDULE", "CONNECT"].map((item) => (
             <button
               key={item}
               onClick={() => scrollToSection(item.toLowerCase())}
-              className="font-display text-xs tracking-[0.2em] text-muted-foreground hover:text-primary transition-colors"
+              className="group relative font-display text-xs tracking-[0.2em] text-muted-foreground hover:text-primary transition-colors"
             >
               {item}
+
+              {/* Animated underline */}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
             </button>
           ))}
         </div>
-        <a
-          href="https://www.twitch.tv/blipr6"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-display text-xs tracking-widest px-4 py-2 bg-primary/10 border border-primary/30 text-primary hover:bg-primary/20 transition-all"
-        >
-          👀 WATCH ON TWITCH
-        </a>
+
+        {/* Social Icons */}
+        <div className="flex items-center gap-6">
+          {[
+            {
+              icon: <FaTwitch />,
+              url: "https://www.twitch.tv/blipr6",
+            },
+            {
+              icon: <FaYoutube />,
+              url: "https://www.youtube.com/@blipR6",
+            },
+            {
+              icon: <FaDiscord />,
+              url: "https://discord.gg/S9MueNj96E",
+            },
+          ].map((item, i) => (
+            <a
+              key={i}
+              href={item.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative text-muted-foreground hover:text-primary transition-colors duration-300 text-lg"
+            >
+              {item.icon}
+
+              {/* Animated underline */}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+            </a>
+          ))}
+        </div>
       </div>
     </nav>
   );

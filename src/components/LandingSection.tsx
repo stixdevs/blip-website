@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { FaTwitch } from "react-icons/fa";
 import bgImage from "@/assets/background-image.png";
 
 const TWITCH_CHANNEL = "blipr6";
@@ -166,23 +167,38 @@ const LiveStatusBadge = ({ isLive }: { isLive: boolean }) => {
       target="_blank"
       rel="noopener noreferrer"
       className={`
-        inline-flex items-center gap-3 px-6 py-3 tactical-border font-display text-sm tracking-widest uppercase
-        transition-all duration-300 hover:scale-105
+        group relative inline-flex items-center justify-center gap-3
+        min-w-[180px] px-6 py-3 tactical-border
+        font-display text-sm tracking-widest uppercase
+        transition-all duration-300 overflow-hidden
         ${
           isLive
             ? "border-destructive text-destructive box-glow-amber"
-            : "text-muted-foreground hover:text-primary hover:border-primary"
+            : "border-border text-muted-foreground"
         }
+        hover:border-primary
       `}
     >
-      <span
-        className={`w-2.5 h-2.5 rounded-full ${
-          isLive
-            ? "bg-destructive animate-live-pulse"
-            : "bg-muted-foreground"
-        }`}
-      />
-      {isLive ? "LIVE NOW" : "OFFLINE"}
+      {/* Base Content */}
+      <div className="flex items-center gap-3 transition-opacity duration-200 group-hover:opacity-0">
+        <span
+          className={`w-2.5 h-2.5 rounded-full ${
+            isLive
+              ? "bg-destructive animate-live-pulse"
+              : "bg-muted-foreground group-hover:bg-primary"
+          }`}
+        />
+        <span>{isLive ? "LIVE NOW" : "OFFLINE"}</span>
+      </div>
+
+      {/* Hover Content */}
+      <div className="absolute flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+        <span>{isLive ? "WATCH ON" : "GO TO"}</span>
+        <FaTwitch className="text-primary text-sm" />
+      </div>
+
+      {/* Bottom animated bar */}
+      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
     </a>
   );
 };
