@@ -9,6 +9,13 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scrollToSection = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -16,18 +23,18 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-        <a href="#" className="font-display text-xl tracking-[0.2em] text-primary text-glow">
+        <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="font-display text-xl tracking-[0.2em] text-primary text-glow">
           BLIP
-        </a>
+        </button>
         <div className="hidden md:flex items-center gap-8">
-          {["ABOUT", "SCHEDULE", "CONNECT", "EVENTS"].map((item) => (
-            <a
+          {["ABOUT", "SCHEDULE", "CONNECT"].map((item) => (
+            <button
               key={item}
-              href={`#${item.toLowerCase()}`}
+              onClick={() => scrollToSection(item.toLowerCase())}
               className="font-display text-xs tracking-[0.2em] text-muted-foreground hover:text-primary transition-colors"
             >
               {item}
-            </a>
+            </button>
           ))}
         </div>
         <a
