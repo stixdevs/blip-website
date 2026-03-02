@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import TwitchEmbed from "@/components/TwitchEmbed";
+
 import ProfileSection from "@/components/ProfileSection";
 import StreamSchedule from "@/components/StreamSchedule";
 import SocialLinks from "@/components/SocialLinks";
@@ -12,7 +12,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
-      <TwitchEmbed />
+      
       <ProfileSection />
       <StreamSchedule />
       <SocialLinks />

@@ -1,6 +1,47 @@
+import { useState, useEffect, useRef } from "react";
 import heroImage from "@/assets/hero-operator.png";
 
+const TWITCH_CHANNEL = "blipr6";
+
+const getParents = () => {
+  const parents = new Set<string>();
+  parents.add("localhost");
+  parents.add(window.location.hostname);
+  return Array.from(parents);
+};
+
+const buildEmbedUrl = () => {
+  const params = new URLSearchParams();
+  params.set("channel", TWITCH_CHANNEL);
+  params.set("muted", "true");
+  getParents().forEach((p) => params.append("parent", p));
+  return `https://player.twitch.tv/?${params.toString()}`;
+};
+
 const HeroSection = () => {
+  const [isLive, setIsLive] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  // Poll the Twitch oembed endpoint (no auth needed) to check live status
+  useEffect(() => {
+    const checkLive = async () => {
+      try {
+        const res = await fetch(
+          `https://www.twitch.tv/${TWITCH_CHANNEL}`
+        );
+        const text = await res.text();
+        // The page includes "isLiveBroadcast" in JSON-LD when live
+        setIsLive(text.includes('"isLiveBroadcast"'));
+      } catch {
+        // If CORS blocks it, fall back to not changing status
+      }
+    };
+
+    checkLive();
+    const interval = setInterval(checkLive, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden scanline-overlay">
       {/* Background image */}
@@ -14,35 +55,66 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-background/50 to-transparent" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-20 container mx-auto px-6 flex flex-col items-center text-center">
-        <div className="mb-4 flex items-center gap-3">
-          <span className="h-px w-12 bg-primary" />
-          <span className="font-display text-sm tracking-[0.3em] text-primary uppercase animate-flicker">
-            📺 LIVE ON TWITCH
-          </span>
-          <span className="h-px w-12 bg-primary" />
+      {/* Content — two-column on md+ */}
+      <div className="relative z-20 container mx-auto px-6 py-24 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        {/* Left: branding */}
+        <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+          <div className="mb-4 flex items-center gap-3">
+            <span className="h-px w-12 bg-primary" />
+            <span className="font-display text-sm tracking-[0.3em] text-primary uppercase animate-flicker">
+              📺 LIVE ON TWITCH
+            </span>
+            <span className="h-px w-12 bg-primary" />
+          </div>
+
+          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-glow text-primary tracking-wider mb-4 animate-slide-in-up">
+            BLIP
+          </h1>
+
+          <p className="font-body text-lg md:text-xl text-muted-foreground max-w-xl mb-2 animate-slide-in-up" style={{ animationDelay: '0.1s' }}>
+            Twitch Streamer · Rainbow Six Siege · Ark Raiders
+          </p>
+
+          <div className="flex items-center gap-2 mt-2 mb-8 animate-slide-in-up" style={{ animationDelay: '0.2s' }}>
+            <span className="font-display text-xs tracking-widest text-muted-foreground">
+              MAIN: NØKK
+            </span>
+            <span className="text-tactical-line">|</span>
+            <span className="font-display text-xs tracking-widest text-muted-foreground">
+              ROLE: ATTACKER
+            </span>
+          </div>
+
+          <LiveStatusBadge isLive={isLive} />
         </div>
 
-        <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-glow text-primary tracking-wider mb-4 animate-slide-in-up">
-          BLIP
-        </h1>
-
-        <p className="font-body text-lg md:text-xl text-muted-foreground max-w-xl mb-2 animate-slide-in-up" style={{ animationDelay: '0.1s' }}>
-          Twitch Streamer · Rainbow Six Siege · Ark Raiders
-        </p>
-
-        <div className="flex items-center gap-2 mt-2 mb-8 animate-slide-in-up" style={{ animationDelay: '0.2s' }}>
-          <span className="font-display text-xs tracking-widest text-muted-foreground">
-            MAIN: NØKK
-          </span>
-          <span className="text-tactical-line">|</span>
-          <span className="font-display text-xs tracking-widest text-muted-foreground">
-            ROLE: ATTACKER
-          </span>
+        {/* Right: embedded stream */}
+        <div className="w-full animate-slide-in-up" style={{ animationDelay: '0.3s' }}>
+          <div className="tactical-border bg-card box-glow overflow-hidden">
+            <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+              <iframe
+                ref={iframeRef}
+                src={buildEmbedUrl()}
+                className="absolute inset-0 w-full h-full"
+                allowFullScreen
+                title="Blip's Twitch Stream"
+              />
+            </div>
+            <div className="flex items-center justify-between px-4 py-3 border-t border-border">
+              <span className="font-display text-sm tracking-wider text-foreground">
+                blipr6
+              </span>
+              <a
+                href="https://www.twitch.tv/blipr6"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-display text-xs tracking-widest px-4 py-1.5 bg-primary/10 border border-primary/30 text-primary hover:bg-primary/20 transition-all"
+              >
+                OPEN IN TWITCH →
+              </a>
+            </div>
+          </div>
         </div>
-
-        <LiveStatusBadge />
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
@@ -50,9 +122,7 @@ const HeroSection = () => {
   );
 };
 
-const LiveStatusBadge = () => {
-  const isLive = false;
-
+const LiveStatusBadge = ({ isLive }: { isLive: boolean }) => {
   return (
     <a
       href="https://www.twitch.tv/blipr6"
