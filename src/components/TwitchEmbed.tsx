@@ -1,10 +1,20 @@
-import { useState } from "react";
-
 const TWITCH_CHANNEL = "blipr6";
 
-const TwitchEmbed = () => {
-  const [isLive] = useState(false); // Will be driven by API later
+const PARENTS = [
+  "localhost",
+  "id-preview--f8eef2d3-bcaf-43fa-8ce4-261aa6e60d5f.lovable.app",
+  "blipbrand.com",
+];
 
+const buildEmbedUrl = () => {
+  const params = new URLSearchParams();
+  params.set("channel", TWITCH_CHANNEL);
+  params.set("muted", "true");
+  PARENTS.forEach((p) => params.append("parent", p));
+  return `https://player.twitch.tv/?${params.toString()}`;
+};
+
+const TwitchEmbed = () => {
   return (
     <section className="relative py-12 scanline-overlay">
       <div className="container mx-auto px-6">
@@ -18,23 +28,19 @@ const TwitchEmbed = () => {
 
         <div className="max-w-4xl mx-auto">
           <div className="tactical-border bg-card box-glow overflow-hidden">
-            {/* Twitch Embed iframe — works without API keys */}
             <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
               <iframe
-                src={`https://player.twitch.tv/?channel=${TWITCH_CHANNEL}&parent=${window.location.hostname}&muted=true`}
+                src={buildEmbedUrl()}
                 className="absolute inset-0 w-full h-full"
                 allowFullScreen
                 title="Blip's Twitch Stream"
               />
             </div>
 
-            {/* Stream info bar */}
             <div className="flex items-center justify-between px-4 py-3 border-t border-border">
-              <div className="flex items-center gap-3">
-                <span className="font-display text-sm tracking-wider text-foreground">
-                  blipr6
-                </span>
-              </div>
+              <span className="font-display text-sm tracking-wider text-foreground">
+                blipr6
+              </span>
               <a
                 href="https://www.twitch.tv/blipr6"
                 target="_blank"
