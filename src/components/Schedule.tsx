@@ -20,13 +20,13 @@ const schedule: ScheduleDay[] = [
 
 const TWITCH_URL = "https://twitch.tv/blipr6";
 
-const StreamSchedule = () => {
+const Schedule = () => {
   const todayIndex = new Date().getDay(); // 0 = Sun
   const dayMap = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   const today = dayMap[todayIndex];
 
   return (
-    <section id="schedule" className="relative py-28 scanline-overlay">
+    <section id="schedule" className="relative py-12 scanline-overlay">
       <div className="container mx-auto px-6">
         <div className="flex items-center gap-3 mb-4">
           <span className="h-px flex-1 bg-tactical-line" />
@@ -37,7 +37,7 @@ const StreamSchedule = () => {
         </div>
 
         <p className="text-center font-body text-muted-foreground mb-14">
-          Catch Blip live on Twitch — times may vary, follow for notifications!
+          Catch blip live on Twitch & YouTube — times may vary, follow for notifications!
         </p>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-4 max-w-4xl mx-auto place-items-center">
@@ -149,4 +149,4 @@ const StreamSchedule = () => {
   );
 };
 
-export default StreamSchedule;
+export default Schedule;

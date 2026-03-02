@@ -35,15 +35,19 @@ const links: SocialLink[] = [
 
 const SocialLinks = () => {
   return (
-    <section id="socials" className="relative py-24 scanline-overlay">
+    <section id="socials" className="relative py-12 scanline-overlay">
       <div className="container mx-auto px-6">
-        <div className="flex items-center gap-3 mb-12">
+        <div className="flex items-center gap-3 mb-4">
           <span className="h-px flex-1 bg-tactical-line" />
           <h2 className="font-display text-2xl tracking-[0.2em] text-primary text-glow">
             // SOCIALS
           </h2>
           <span className="h-px flex-1 bg-tactical-line" />
         </div>
+
+        <p className="text-center font-body text-muted-foreground mb-14">
+          Connect with blip across platforms — follow, subscribe, and join the community!
+        </p>
 
         <div className="grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(250px,1fr))]">
           {links.map((link, i) => (

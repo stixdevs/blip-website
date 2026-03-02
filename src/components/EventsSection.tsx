@@ -36,17 +36,17 @@ const upcomingEvents: GameEvent[] = [
 
 const EventsSection = () => {
   return (
-    <section id="events" className="relative py-24 scanline-overlay">
+    <section id="events" className="relative py-12 scanline-overlay">
       <div className="container mx-auto px-6">
         <div className="flex items-center gap-3 mb-4">
           <span className="h-px flex-1 bg-tactical-line" />
-          <h2 className="font-display text-2xl tracking-[0.2em] text-secondary">
-            // EVENTS ✦
+          <h2 className="font-display text-2xl tracking-[0.2em] text-primary text-glow">
+            // EVENTS
           </h2>
           <span className="h-px flex-1 bg-tactical-line" />
         </div>
 
-        <p className="text-center font-body text-muted-foreground mb-12">
+        <p className="text-center font-body text-muted-foreground mb-14">
           Sign up for upcoming viewer events and play with the squad
         </p>
 

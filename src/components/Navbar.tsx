@@ -31,7 +31,7 @@ const Navbar = () => {
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="font-display text-xl tracking-[0.2em] text-primary text-glow"
         >
-          BLIP
+          blip
         </button>
 
         {/* Nav Links */}

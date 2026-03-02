@@ -95,7 +95,7 @@ const LandingSection = () => {
           </div>
 
           <h1 className="font-display text-6xl md:text-8xl text-primary text-glow tracking-wider mb-4">
-            BLIP
+            blip
           </h1>
 
           <p className="font-body text-lg md:text-xl text-muted-foreground mb-3">
@@ -104,7 +104,7 @@ const LandingSection = () => {
 
           <div className="flex justify-center items-center gap-3 mb-6">
             <span className="font-display text-xs tracking-widest text-muted-foreground">
-              MAIN: NØKK
+              R6 MAIN: NØKK
             </span>
             <span className="text-tactical-line">|</span>
             <span className="font-display text-xs tracking-widest text-muted-foreground">
@@ -127,7 +127,7 @@ const LandingSection = () => {
                 src={buildEmbedUrl()}
                 className="absolute inset-0 w-full h-full"
                 allowFullScreen
-                title="Blip's Twitch Stream"
+                title="blip's Twitch Stream"
               />
             </div>
           </div>

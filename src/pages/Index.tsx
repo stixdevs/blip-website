@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import LandingSection from "@/components/LandingSection";
 
 import ProfileSection from "@/components/ProfileSection";
-import StreamSchedule from "@/components/StreamSchedule";
+import Schedule from "@/components/Schedule";
 import SocialLinks from "@/components/SocialLinks";
 import SupportLinks from "@/components/SupportLinks";
 import Footer from "@/components/Footer";
@@ -14,7 +14,7 @@ const Index = () => {
       <LandingSection />
       
       <ProfileSection />
-      <StreamSchedule />
+      <Schedule />
       <SocialLinks />
       <SupportLinks />
       <Footer />

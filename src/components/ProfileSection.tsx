@@ -2,7 +2,7 @@ import profileArt from "@/assets/operator-art.png";
 
 const ProfileSection = () => {
   return (
-    <section id="about" className="relative py-24 scanline-overlay">
+    <section id="about" className="relative py-12 scanline-overlay">
       <div className="container mx-auto px-6">
         <div className="flex items-center gap-3 mb-12">
           <span className="h-px flex-1 bg-tactical-line" />
@@ -17,7 +17,7 @@ const ProfileSection = () => {
           <div className="relative tactical-border bg-card box-glow aspect-[3/4] flex items-center justify-center overflow-hidden group">
             <img
               src={profileArt}
-              alt="Blip as Nøkk with two cats, Cheeto & Mochie"
+              alt="blip as Nøkk with two cats, Cheeto & Mochie"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
@@ -30,11 +30,11 @@ const ProfileSection = () => {
 
           {/* Dossier info */}
           <div className="flex flex-col justify-center space-y-6">
-            <DossierField label="CODENAME" value="Blip" />
+            <DossierField label="CODENAME" value="blip" />
             <DossierField label="PRIMARY GAME" value="Tom Clancy's Rainbow Six Siege" />
             <DossierField label="FAVORITE R6 OPERATOR" value="NØKK — HEL Presence Reduction" />
             <DossierField label="SECONDARY GAME" value="Arc Raiders" />
-            <DossierField label="SPECIAL UNITS" value="🐱 Cheeto  ·  🐱 Mochie" />
+            <DossierField label="SPECIAL UNITS" value="🐈 cheeto  ·  🐈‍⬛ mochie" />
             <DossierField label="STATUS" value="Ready for chaos" />
 
             <div className="pt-4">
