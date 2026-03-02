@@ -1,3 +1,5 @@
+import profileArt from "@/assets/profile-art.png";
+
 const ProfileSection = () => {
   return (
     <section id="about" className="relative py-24 scanline-overlay">
@@ -13,18 +15,12 @@ const ProfileSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Profile art placeholder */}
           <div className="relative tactical-border bg-card box-glow aspect-[3/4] flex items-center justify-center overflow-hidden group">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
-            <div className="text-center p-8 relative z-10">
-              <div className="w-24 h-24 mx-auto mb-6 rounded-full tactical-border flex items-center justify-center animate-pulse-glow">
-                <span className="font-display text-3xl text-primary">N</span>
-              </div>
-              <p className="font-display text-sm tracking-[0.2em] text-primary mb-2">
-                [ ART INCOMING ]
-              </p>
-              <p className="font-body text-sm text-muted-foreground max-w-xs">
-                Nøkk cosplay art with two feline operators will be deployed here
-              </p>
-            </div>
+            <img
+              src={profileArt}
+              alt="Blip as Nøkk with two cats"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
             {/* Corner decorations */}
             <div className="absolute top-0 left-0 w-8 h-8 border-t border-l border-primary/50" />
             <div className="absolute top-0 right-0 w-8 h-8 border-t border-r border-primary/50" />
