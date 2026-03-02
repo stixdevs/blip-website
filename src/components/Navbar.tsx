@@ -43,7 +43,7 @@ const Navbar = () => {
           rel="noopener noreferrer"
           className="font-display text-xs tracking-widest px-4 py-2 bg-primary/10 border border-primary/30 text-primary hover:bg-primary/20 transition-all"
         >
-          📺 WATCH LIVE
+          👀 WATCH ON TWITCH
         </a>
       </div>
     </nav>

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import heroImage from "@/assets/hero-operator.png";
+import heroImage from "@/assets/background-image.png";
 
 const TWITCH_CHANNEL = "blipr6";
 
@@ -13,7 +13,8 @@ const getParents = () => {
 const buildEmbedUrl = () => {
   const params = new URLSearchParams();
   params.set("channel", TWITCH_CHANNEL);
-  params.set("muted", "true");
+  params.set("muted", "false");
+  params.set("autoplay", "true");
   getParents().forEach((p) => params.append("parent", p));
   return `https://player.twitch.tv/?${params.toString()}`;
 };
@@ -22,24 +23,44 @@ const HeroSection = () => {
   const [isLive, setIsLive] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  // Poll the Twitch oembed endpoint (no auth needed) to check live status
   useEffect(() => {
-    const checkLive = async () => {
-      try {
-        const res = await fetch(
-          `https://www.twitch.tv/${TWITCH_CHANNEL}`
-        );
-        const text = await res.text();
-        // The page includes "isLiveBroadcast" in JSON-LD when live
-        setIsLive(text.includes('"isLiveBroadcast"'));
-      } catch {
-        // If CORS blocks it, fall back to not changing status
-      }
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+
+    let liveDetected = false;
+
+    const handleLoad = () => {
+      // Give Twitch player a moment to initialize
+      setTimeout(() => {
+        try {
+          // If video actually started rendering,
+          // iframe dimensions update due to player UI
+          const rect = iframe.getBoundingClientRect();
+
+          // Live player forces repaint + height stabilization
+          if (rect.height > 0) {
+            liveDetected = true;
+            setIsLive(true);
+          }
+        } catch {
+          setIsLive(false);
+        }
+      }, 2500);
     };
 
-    checkLive();
-    const interval = setInterval(checkLive, 60000);
-    return () => clearInterval(interval);
+    iframe.addEventListener("load", handleLoad);
+
+    // retry check every 30s
+    const interval = setInterval(() => {
+      if (!liveDetected) {
+        iframe.src = buildEmbedUrl() + "&t=" + Date.now();
+      }
+    }, 30000);
+
+    return () => {
+      iframe.removeEventListener("load", handleLoad);
+      clearInterval(interval);
+    };
   }, []);
 
   return (
@@ -132,7 +153,7 @@ const LiveStatusBadge = ({ isLive }: { isLive: boolean }) => {
         inline-flex items-center gap-3 px-6 py-3 tactical-border font-display text-sm tracking-widest uppercase
         transition-all duration-300 hover:scale-105
         ${isLive
-          ? 'border-destructive text-destructive box-glow-amber animate-pulse-glow'
+          ? 'border-destructive text-destructive box-glow-amber'
           : 'text-muted-foreground hover:text-primary hover:border-primary'
         }
       `}
