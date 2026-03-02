@@ -1,4 +1,4 @@
-import profileArt from "@/assets/profile-art.png";
+import profileArt from "@/assets/operator-art.png";
 
 const ProfileSection = () => {
   return (

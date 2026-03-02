@@ -7,9 +7,9 @@ interface ScheduleDay {
 
 const schedule: ScheduleDay[] = [
   { day: "MON", time: "6PM EST", game: "R6 Siege", active: true },
-  { day: "TUE", time: "6PM EST", game: "R6 Siege", active: true },
+  { day: "TUE", time: "—", game: "", active: false },
   { day: "WED", time: "6PM EST", game: "R6 Siege", active: true },
-  { day: "THU", time: "6PM EST", game: "R6 Siege", active: true },
+  { day: "THU", time: "—", game: "", active: false },
   { day: "FRI", time: "6PM EST", game: "R6 Siege", active: true },
   { day: "SAT", time: "6PM EST", game: "R6 Siege", active: true },
   { day: "SUN", time: "—", game: "", active: false },
