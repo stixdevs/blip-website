@@ -13,7 +13,6 @@ const getParents = () => {
 const buildEmbedUrl = () => {
   const params = new URLSearchParams();
   params.set("channel", TWITCH_CHANNEL);
-  params.set("muted", "false");
   params.set("autoplay", "true");
   getParents().forEach((p) => params.append("parent", p));
   return `https://player.twitch.tv/?${params.toString()}`;
@@ -21,7 +20,6 @@ const buildEmbedUrl = () => {
 
 const LandingSection = () => {
   const [isLive, setIsLive] = useState(false);
-
   const detectionRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
@@ -60,7 +58,7 @@ const LandingSection = () => {
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden scanline-overlay">
-      
+
       {/* Hidden Live Detection Iframe */}
       <iframe
         ref={detectionRef}
@@ -119,10 +117,7 @@ const LandingSection = () => {
           style={{ animationDelay: "0.2s" }}
         >
           <div className="tactical-border bg-card box-glow overflow-hidden">
-            <div
-              className="relative w-full"
-              style={{ paddingBottom: "56.25%" }}
-            >
+            <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
               <iframe
                 src={buildEmbedUrl()}
                 className="absolute inset-0 w-full h-full"
@@ -131,6 +126,45 @@ const LandingSection = () => {
               />
             </div>
           </div>
+        </div>
+
+        {/* ===== PERSONAL MESSAGE ===== */}
+        <div
+          className="mt-14 max-w-3xl text-center space-y-6 text-muted-foreground leading-relaxed animate-slide-in-up"
+          style={{ animationDelay: "0.35s" }}
+        >
+          <p className="text-lg text-foreground font-medium">
+            Hi, I’m Blip.
+          </p>
+
+          <p>
+            I went most of my life without playing video games at all, and when I finally decided
+            to try one, I picked Rainbow Six Siege — which might be one of the hardest ways to get
+            introduced to gaming. It wasn’t easy, but I stuck with it. And somewhere along the way,
+            I fell in love — not just with the game, but with the community around it. The voice chats,
+            the inside jokes, the random teammates that turn into friends… that’s what really hooked me.
+          </p>
+
+          <p>
+            I’m still pretty new, still learning, and definitely still making questionable plays.
+            Siege can be intense, but I like keeping things light. I’m here for the laughs, the vibes,
+            and the moments we get to share — not just the rank. So if you need a break from the pressure,
+            come hang out. Queue casual. Make dumb plays. Laugh about it. The game’s more fun when
+            we don’t take ourselves too seriously, queens.
+          </p>
+
+          <p>
+            I’m starting to branch out into new games (Arc Raiders being one of them), and I have big
+            dreams of doing this full-time someday. For now, I’m just really grateful you’re here.
+          </p>
+
+          <p className="text-primary font-medium">
+            Yahs queen. 💀✨
+          </p>
+
+          <p className="text-sm opacity-70">
+            (Cheeto and Mochi approve.)
+          </p>
         </div>
 
       </div>
