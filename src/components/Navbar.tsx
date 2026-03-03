@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { FaTwitch, FaYoutube, FaDiscord } from "react-icons/fa";
+import pfp from "@/assets/pfp.png";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -29,9 +30,17 @@ const Navbar = () => {
         {/* Logo */}
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="font-display text-xl tracking-[0.2em] text-primary text-glow"
+          className="flex items-center gap-3 group"
         >
-          blip
+          <img
+            src={pfp}
+            alt="blip profile"
+            className="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover border border-primary/40 shadow-[0_0_8px_rgba(255,0,150,0.6)] group-hover:shadow-[0_0_14px_rgba(255,0,150,0.9)] transition-all duration-300"
+          />
+
+          <span className="font-display text-xl tracking-[0.2em] text-primary text-glow group-hover:opacity-90 transition-opacity">
+            blip
+          </span>
         </button>
 
         {/* Nav Links */}

@@ -56,6 +56,13 @@ const LandingSection = () => {
     };
   }, []);
 
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden scanline-overlay">
 
@@ -83,7 +90,7 @@ const LandingSection = () => {
       <div className="relative z-20 container mx-auto px-6 py-20 flex flex-col items-center">
 
         {/* ===== TOP BRANDING ===== */}
-        <div className="text-center max-w-3xl mb-10 animate-slide-in-up">
+        <div className="text-center max-w-3xl mb-3 animate-slide-in-up">
           <div className="mb-5 flex items-center justify-center gap-3">
             <span className="h-px w-12 bg-primary" />
             <span className="font-display text-sm tracking-[0.3em] text-primary uppercase animate-flicker">
@@ -128,9 +135,40 @@ const LandingSection = () => {
           </div>
         </div>
 
+        {/* ===== MOBILE ACTION BUTTONS ===== */}
+        <div
+          className="md:hidden flex justify-center gap-4 mt-10 animate-slide-in-up"
+          style={{ animationDelay: "0.25s" }}
+        >
+          {/* SOCIALS */}
+          <button
+            onClick={() => scrollToSection("socials")}
+            className="group relative px-6 py-3 bg-card tactical-border box-glow transition-all duration-300 hover:border-primary"
+          >
+            <span className="font-display text-xs tracking-widest text-foreground group-hover:text-primary transition-colors">
+              SOCIALS
+            </span>
+
+            {/* Animated underline (same as cards) */}
+            <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+          </button>
+
+          {/* SUPPORT */}
+          <button
+            onClick={() => scrollToSection("support")}
+            className="group relative px-6 py-3 bg-card tactical-border box-glow transition-all duration-300 hover:border-primary"
+          >
+            <span className="font-display text-xs tracking-widest text-foreground group-hover:text-primary transition-colors">
+              SUPPORT
+            </span>
+
+            <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+          </button>
+        </div>
+
         {/* ===== PERSONAL MESSAGE ===== */}
         <div
-          className="mt-14 max-w-3xl text-center space-y-6 text-muted-foreground leading-relaxed animate-slide-in-up"
+          className="mt-8 max-w-3xl text-center space-y-6 text-muted-foreground leading-relaxed animate-slide-in-up"
           style={{ animationDelay: "0.35s" }}
         >
           <p className="text-lg text-foreground font-medium">
