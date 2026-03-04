@@ -1,5 +1,6 @@
 import { ExternalLink } from "lucide-react";
 import { FaTwitch } from "react-icons/fa";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 interface ScheduleDay {
   day: string;
@@ -21,26 +22,37 @@ const schedule: ScheduleDay[] = [
 const TWITCH_URL = "https://twitch.tv/blipr6";
 
 const Schedule = () => {
-  const todayIndex = new Date().getDay(); // 0 = Sun
+  const todayIndex = new Date().getDay();
   const dayMap = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   const today = dayMap[todayIndex];
+
+  const heading = useScrollReveal();
+  const grid = useScrollReveal({ rootMargin: "0px 0px -40px 0px" });
 
   return (
     <section id="schedule" className="relative py-12 scanline-overlay">
       <div className="container mx-auto px-6">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="h-px flex-1 bg-tactical-line" />
-          <h2 className="font-display text-2xl tracking-[0.2em] text-primary text-glow">
-            // schedule
-          </h2>
-          <span className="h-px flex-1 bg-tactical-line" />
+        <div
+          ref={heading.ref}
+          className={`reveal-up ${heading.isVisible ? "reveal-visible" : "reveal-hidden"}`}
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <span className="h-px flex-1 bg-tactical-line" />
+            <h2 className="font-display text-2xl tracking-[0.2em] text-primary text-glow">
+              // schedule
+            </h2>
+            <span className="h-px flex-1 bg-tactical-line" />
+          </div>
+
+          <p className="text-center font-body text-muted-foreground mb-14">
+            Catch blip live on Twitch & YouTube — times may vary, follow for notifications!
+          </p>
         </div>
 
-        <p className="text-center font-body text-muted-foreground mb-14">
-          Catch blip live on Twitch & YouTube — times may vary, follow for notifications!
-        </p>
-
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-4 max-w-4xl mx-auto place-items-center">
+        <div
+          ref={grid.ref}
+          className={`grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-4 max-w-4xl mx-auto place-items-center reveal-stagger ${grid.isVisible ? "reveal-visible" : "reveal-hidden"}`}
+        >
           {schedule.map((s) => {
             const isToday = s.day === today;
             const isClickable = isToday && s.active;
@@ -61,12 +73,9 @@ const Schedule = () => {
                     : ""
                 }`}
               >
-                {/* Background fade — ONLY for today */}
                 {isClickable && (
                   <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none" />
                 )}
-
-                {/* Twitch icon centered — ONLY for today */}
                 {isClickable && (
                   <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 pointer-events-none">
                     <span className="font-display text-xs tracking-widest text-primary mb-2">
@@ -75,13 +84,10 @@ const Schedule = () => {
                     <FaTwitch className="text-primary text-4xl drop-shadow-xl" />
                   </div>
                 )}
-
-                {/* External link icon — ONLY on hover */}
                 {isClickable && (
                   <ExternalLink className="absolute top-3 right-3 w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 pointer-events-none" />
                 )}
 
-                {/* Main content */}
                 <div
                   className={`relative z-0 transition-opacity duration-300 ${
                     isClickable ? "group-hover:opacity-30" : ""
@@ -108,7 +114,6 @@ const Schedule = () => {
                   )}
                 </div>
 
-                {/* Bottom bar (SocialLinks style) */}
                 {isClickable && (
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full z-30" />
                 )}
@@ -117,7 +122,6 @@ const Schedule = () => {
 
             return (
               <div key={s.day} className="w-full flex flex-col items-center">
-                {/* Always reserve space for TODAY label */}
                 <div className="h-4 flex items-center justify-center mb-2">
                   {isToday && (
                     <span className="text-[10px] font-display tracking-wider text-primary">

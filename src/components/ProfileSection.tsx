@@ -1,10 +1,18 @@
 import profileArt from "@/assets/operator-art.png";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const ProfileSection = () => {
+  const heading = useScrollReveal();
+  const image = useScrollReveal({ rootMargin: "0px 0px -80px 0px" });
+  const dossier = useScrollReveal({ rootMargin: "0px 0px -80px 0px" });
+
   return (
     <section id="about" className="relative py-12 scanline-overlay">
       <div className="container mx-auto px-6">
-        <div className="flex items-center gap-3 mb-12">
+        <div
+          ref={heading.ref}
+          className={`flex items-center gap-3 mb-12 reveal-up ${heading.isVisible ? "reveal-visible" : "reveal-hidden"}`}
+        >
           <span className="h-px flex-1 bg-tactical-line" />
           <h2 className="font-display text-2xl tracking-[0.2em] text-primary text-glow">
             // operator profile ✦
@@ -13,15 +21,17 @@ const ProfileSection = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Profile art placeholder */}
-          <div className="relative tactical-border bg-card box-glow aspect-[3/4] flex items-center justify-center overflow-hidden group">
+          {/* Profile art */}
+          <div
+            ref={image.ref}
+            className={`relative tactical-border bg-card box-glow aspect-[3/4] flex items-center justify-center overflow-hidden group reveal-left ${image.isVisible ? "reveal-visible" : "reveal-hidden"}`}
+          >
             <img
               src={profileArt}
               alt="blip as Nøkk with two cats, Cheeto & Mochie"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
-            {/* Corner decorations */}
             <div className="absolute top-0 left-0 w-8 h-8 border-t border-l border-primary/50" />
             <div className="absolute top-0 right-0 w-8 h-8 border-t border-r border-primary/50" />
             <div className="absolute bottom-0 left-0 w-8 h-8 border-b border-l border-primary/50" />
@@ -29,7 +39,10 @@ const ProfileSection = () => {
           </div>
 
           {/* Dossier info */}
-          <div className="flex flex-col justify-center space-y-6">
+          <div
+            ref={dossier.ref}
+            className={`flex flex-col justify-center space-y-6 reveal-stagger reveal-right ${dossier.isVisible ? "reveal-visible" : "reveal-hidden"}`}
+          >
             <DossierField label="CODENAME" value="blip" />
             <DossierField label="PRIMARY GAME" value="Tom Clancy's Rainbow Six Siege" />
             <DossierField label="FAVORITE R6 OPERATOR" value="NØKK — HEL Presence Reduction" />
@@ -41,7 +54,7 @@ const ProfileSection = () => {
               <p className="font-body text-muted-foreground leading-relaxed">
                 A stealth operator in theory, chaos operator in practice.
                 Known for questionable decisions, accidental destruction,
-                clutch moments that shouldn’t work, and a community that
+                clutch moments that shouldn't work, and a community that
                 shows up equally for the gameplay and the laughs. Occasionally
                 assisted by two furry co-streamers with zero tactical discipline.
               </p>
