@@ -1,10 +1,20 @@
+import { useEffect } from "react";
 import profileArt from "@/assets/operator-art.png";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { onSectionNavigate } from "@/lib/scrollEvents";
 
 const ProfileSection = () => {
   const heading = useScrollReveal();
   const image = useScrollReveal({ rootMargin: "0px 0px -80px 0px" });
   const dossier = useScrollReveal({ rootMargin: "0px 0px -80px 0px" });
+
+  useEffect(() => {
+    return onSectionNavigate(() => {
+      heading.reset();
+      image.reset();
+      dossier.reset();
+    });
+  }, [heading.reset, image.reset, dossier.reset]);
 
   return (
     <section id="about" className="relative py-12 scanline-overlay">

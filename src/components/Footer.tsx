@@ -1,7 +1,15 @@
+import { useEffect } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { onSectionNavigate } from "@/lib/scrollEvents";
 
 const Footer = () => {
   const footer = useScrollReveal({ threshold: 0.3 });
+
+  useEffect(() => {
+    return onSectionNavigate(() => {
+      footer.reset();
+    });
+  }, [footer.reset]);
 
   return (
     <footer className="relative py-12 mt-12 border-t border-tactical-line">

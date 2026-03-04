@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { ExternalLink } from "lucide-react";
 import { FaTwitch } from "react-icons/fa";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { onSectionNavigate } from "@/lib/scrollEvents";
 
 interface ScheduleDay {
   day: string;
@@ -28,6 +30,13 @@ const Schedule = () => {
 
   const heading = useScrollReveal();
   const grid = useScrollReveal({ rootMargin: "0px 0px -40px 0px" });
+
+  useEffect(() => {
+    return onSectionNavigate(() => {
+      heading.reset();
+      grid.reset();
+    });
+  }, [heading.reset, grid.reset]);
 
   return (
     <section id="schedule" className="relative py-12 scanline-overlay">

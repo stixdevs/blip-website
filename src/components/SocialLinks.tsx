@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { ExternalLink } from "lucide-react";
 import { FaTwitch, FaYoutube, FaDiscord } from "react-icons/fa";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { onSectionNavigate } from "@/lib/scrollEvents";
 
 interface SocialLink {
   name: string;
@@ -37,6 +39,13 @@ const links: SocialLink[] = [
 const SocialLinks = () => {
   const heading = useScrollReveal();
   const grid = useScrollReveal({ rootMargin: "0px 0px -40px 0px" });
+
+  useEffect(() => {
+    return onSectionNavigate(() => {
+      heading.reset();
+      grid.reset();
+    });
+  }, [heading.reset, grid.reset]);
 
   return (
     <section id="socials" className="relative py-12 scanline-overlay">
