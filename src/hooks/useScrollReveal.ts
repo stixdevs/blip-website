@@ -1,17 +1,20 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 interface ScrollRevealOptions {
   threshold?: number;
   rootMargin?: string;
-  once?: boolean;
 }
 
 export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(
   options: ScrollRevealOptions = {}
 ) {
-  const { threshold = 0.15, rootMargin = "0px 0px -60px 0px", once = true } = options;
+  const { threshold = 0.15, rootMargin = "0px 0px -60px 0px" } = options;
   const ref = useRef<T>(null);
   const [isVisible, setIsVisible] = useState(false);
+
+  const reset = useCallback(() => {
+    setIsVisible(false);
+  }, []);
 
   useEffect(() => {
     const el = ref.current;
@@ -21,9 +24,6 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          if (once) observer.unobserve(el);
-        } else if (!once) {
-          setIsVisible(false);
         }
       },
       { threshold, rootMargin }
@@ -31,7 +31,7 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [threshold, rootMargin, once]);
+  }, [threshold, rootMargin, isVisible]);
 
-  return { ref, isVisible };
+  return { ref, isVisible, reset };
 }

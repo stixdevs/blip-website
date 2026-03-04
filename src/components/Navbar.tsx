@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { FaTwitch, FaYoutube, FaDiscord } from "react-icons/fa";
 import pfp from "@/assets/pfp.png";
+import { emitSectionNavigate } from "@/lib/scrollEvents";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -12,6 +13,7 @@ const Navbar = () => {
   }, []);
 
   const scrollToSection = (id: string) => {
+    emitSectionNavigate(id);
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });

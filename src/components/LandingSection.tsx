@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import bgImage from "@/assets/background-image.png";
+import { emitSectionNavigate } from "@/lib/scrollEvents";
 
 const TWITCH_CHANNEL = "blipr6";
 
@@ -57,6 +58,7 @@ const LandingSection = () => {
   }, []);
 
   const scrollToSection = (id: string) => {
+    emitSectionNavigate(id);
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
