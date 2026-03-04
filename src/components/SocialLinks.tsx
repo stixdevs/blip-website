@@ -1,5 +1,6 @@
 import { ExternalLink } from "lucide-react";
-import { FaTwitch, FaYoutube, FaDiscord, FaEtsy } from "react-icons/fa";
+import { FaTwitch, FaYoutube, FaDiscord } from "react-icons/fa";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 interface SocialLink {
   name: string;
@@ -34,34 +35,44 @@ const links: SocialLink[] = [
 ];
 
 const SocialLinks = () => {
+  const heading = useScrollReveal();
+  const grid = useScrollReveal({ rootMargin: "0px 0px -40px 0px" });
+
   return (
     <section id="socials" className="relative py-12 scanline-overlay">
       <div className="container mx-auto px-6">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="h-px flex-1 bg-tactical-line" />
-          <h2 className="font-display text-2xl tracking-[0.2em] text-primary text-glow">
-            // socials
-          </h2>
-          <span className="h-px flex-1 bg-tactical-line" />
+        <div
+          ref={heading.ref}
+          className={`reveal-up ${heading.isVisible ? "reveal-visible" : "reveal-hidden"}`}
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <span className="h-px flex-1 bg-tactical-line" />
+            <h2 className="font-display text-2xl tracking-[0.2em] text-primary text-glow">
+              // socials
+            </h2>
+            <span className="h-px flex-1 bg-tactical-line" />
+          </div>
+
+          <p className="text-center font-body text-muted-foreground mb-14">
+            Connect with blip across platforms — follow, subscribe, and join the community!
+          </p>
         </div>
 
-        <p className="text-center font-body text-muted-foreground mb-14">
-          Connect with blip across platforms — follow, subscribe, and join the community!
-        </p>
-
-        <div className="grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(250px,1fr))]">
-          {links.map((link, i) => (
+        <div
+          ref={grid.ref}
+          className={`grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(250px,1fr))] reveal-stagger ${grid.isVisible ? "reveal-visible" : "reveal-hidden"}`}
+        >
+          {links.map((link) => (
             <a
               key={link.name}
               href={link.active ? link.url : undefined}
               target={link.active ? "_blank" : undefined}
               rel={link.active ? "noopener noreferrer" : undefined}
-              className={`group relative p-6 bg-card tactical-border transition-all duration-300 box-glow opacity-0 animate-slide-in-up ${
+              className={`group relative p-6 bg-card tactical-border transition-all duration-300 box-glow ${
                 link.active
                   ? "hover:border-primary cursor-pointer"
                   : "opacity-60 cursor-default"
               }`}
-              style={{ animationDelay: `${i * 0.1}s` }}
             >
               <div className="flex items-start justify-between mb-4">
                 <span className="text-2xl text-muted-foreground group-hover:text-primary transition-colors">

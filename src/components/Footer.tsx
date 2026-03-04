@@ -1,7 +1,14 @@
+import { useScrollReveal } from "@/hooks/useScrollReveal";
+
 const Footer = () => {
+  const footer = useScrollReveal({ threshold: 0.3 });
+
   return (
     <footer className="relative py-12 mt-12 border-t border-tactical-line">
-      <div className="container mx-auto px-6 text-center">
+      <div
+        ref={footer.ref}
+        className={`container mx-auto px-6 text-center reveal-scale ${footer.isVisible ? "reveal-visible" : "reveal-hidden"}`}
+      >
         <p className="font-display text-xs tracking-[0.3em] text-muted-foreground">
           © {new Date().getFullYear()} blip // all rights reserved
         </p>
