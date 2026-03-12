@@ -3,6 +3,23 @@ import { Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 import pfp from "@/assets/pfp.png";
 
+const TWITCH_CHANNEL = "blipr6";
+
+const getParents = () => {
+  const parents = new Set<string>();
+  parents.add("localhost");
+  parents.add(window.location.hostname);
+  return Array.from(parents);
+};
+
+const buildEmbedUrl = () => {
+  const params = new URLSearchParams();
+  params.set("channel", TWITCH_CHANNEL);
+  params.set("autoplay", "true");
+  getParents().forEach((p) => params.append("parent", p));
+  return `https://player.twitch.tv/?${params.toString()}`;
+};
+
 interface LinkItem {
   name: string;
   url: string;
@@ -52,6 +69,7 @@ const Links = () => {
   return (
     <div className="min-h-screen bg-background flex items-start justify-center py-12 px-4">
       <div className="w-full max-w-md flex flex-col items-center gap-6">
+
         {/* Profile Picture */}
         <img
           src={pfp}
@@ -135,6 +153,20 @@ const Links = () => {
               </Link>
             );
           })}
+        </div>
+
+        {/* Twitch Stream */}
+        <div className="w-full mt-2">
+          <div className="tactical-border bg-card box-glow overflow-hidden">
+            <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+              <iframe
+                src={buildEmbedUrl()}
+                className="absolute inset-0 w-full h-full"
+                allowFullScreen
+                title="blip Twitch Stream"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
